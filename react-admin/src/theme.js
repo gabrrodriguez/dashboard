@@ -1,4 +1,4 @@
-import { CreateContext, useState, useMemo } from 'react'
+import { CreateContext, useState, useMemo, createContext } from 'react'
 import { createTheme } from '@mui/material/styles'
 import { fontFamily, typography } from '@mui/system'
 
@@ -169,24 +169,45 @@ export const themeSettings = (mode) => {
             },
             h2: {
                 fontFamily: ["Source Sans Pro", "sans-seriff"].join(","),
-                fontSize: 40,
+                fontSize: 32,
             },
             h3: {
                 fontFamily: ["Source Sans Pro", "sans-seriff"].join(","),
-                fontSize: 40,
+                fontSize: 24,
             },
             h4: {
                 fontFamily: ["Source Sans Pro", "sans-seriff"].join(","),
-                fontSize: 40,
+                fontSize: 20,
             },
             h5: {
                 fontFamily: ["Source Sans Pro", "sans-seriff"].join(","),
-                fontSize: 40,
+                fontSize: 16,
             },
             h6: {
                 fontFamily: ["Source Sans Pro", "sans-seriff"].join(","),
-                fontSize: 40,
+                fontSize: 14,
             }
         }
     }
+}
+
+// React Context for color mode
+export const ColorModeContext = createContext({
+    toggleColorMode: () => {}
+})
+
+export const useMode = () => {
+    const [mode, setMode] = useState("dark")
+
+    const colorMode = useMemo(
+        () => ({
+            toggleColorMode: () => 
+                setMode((prev) => (prev === 'light' ? 'dark' : 'light'))
+        }),
+        []
+    )
+
+    const theme = useMemo(()=> createTheme(themeSettings(mode)), [mode])
+
+    return [theme, colorMode]
 }
