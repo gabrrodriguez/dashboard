@@ -20,7 +20,7 @@ import MapOutlinedIcon from "@mui/icons-material/MapOutlined";
 const Item = ({ title, to, icon, selected, setSelected }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
-  
+
   return (
     <MenuItem
       active={selected === title}
@@ -36,7 +36,7 @@ const Item = ({ title, to, icon, selected, setSelected }) => {
   );
 };
 
-const C_Sidebar = () => {
+const CustomSidebar = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const [isCollapsed, setIsCollapsed] = useState(false);
@@ -44,20 +44,24 @@ const C_Sidebar = () => {
 
   return (
     <Box      sx={{
-      "& .pro-sidebar-inner": {
+      "& .ps-sidebar-inner": {
         background: `${colors.primary[400]} !important`,
       },
-      "& .pro-icon-wrapper": {
+      "& .ps-sidebar-container": {
+        background: `${colors.primary[500]} !important`,
+      },
+      "& .ps-icon-wrapper": {
         backgroundColor: "transparent !important",
       },
-      "& .pro-inner-item": {
+      "& .ps-inner-item": {
         padding: "5px 35px 5px 20px !important",
       },
-      "& .pro-inner-item:hover": {
+      "& .ps-inner-item:hover": {
         color: "#868dfb !important",
       },
-      "& .pro-menu-item.active": {
+      "& .ps-menu-item.active": {
         color: "#6870fa !important",
+        // color:"#868dfb !important"
       },
     }}>
       <Sidebar collapsed={isCollapsed}>
@@ -224,4 +228,4 @@ const C_Sidebar = () => {
   );
 };
 
-export default C_Sidebar;
+export default CustomSidebar;
